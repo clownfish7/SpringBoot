@@ -1,0 +1,7 @@
+
+spring:
+  mail:
+    username: 279505647@qq.com
+    password: zwufntqxjnkobgea
+    host: smtp.qq.com
+#    properties: mail.stmp.ssl.enable=true
