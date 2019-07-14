@@ -21,13 +21,17 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
+        http.authorizeRequests().anyRequest().permitAll()
+                .and().csrf().disable();
+
         //定制请求的授权
         http.authorizeRequests().antMatchers("/").permitAll()
 //                .antMatchers("/pages/**").permitAll()
                 .antMatchers("/level1/**").hasRole("VIP1")
                 .antMatchers("/level2/**").hasRole("VIP2")
                 .antMatchers("/level3/**").hasRole("VIP3")
-                ;
+        ;
 
         //开启自动配置的登录功能，效果：如果没有登陆，没有权限就会来到登陆页面 spring自带login
         http.formLogin().loginPage("/login")
@@ -58,11 +62,11 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
-                .withUser("zhangsan").password("123456").roles("VIP1","VIP2")
+                .withUser("zhangsan").password("123456").roles("VIP1", "VIP2")
                 .and()
-                .withUser("lisi").password("123456").roles("VIP2","VIP3")
+                .withUser("lisi").password("123456").roles("VIP2", "VIP3")
                 .and()
-                .withUser("wangwu").password("123456").roles("VIP1","VIP3");
+                .withUser("wangwu").password("123456").roles("VIP1", "VIP3");
     }
 
 }
