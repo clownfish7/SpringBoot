@@ -1,0 +1,8 @@
+
+dubbo:
+  application:
+    name: provicer-ticket
+  registry:
+    address: zookeeper://192.168.116.151:2181
+  scan:
+    base-packages: com.clownfish7.springbootdubboproviderticket.service
