@@ -1,0 +1,17 @@
+fastdfs:
+  connect_timeout_in_second: 5  #http\u8FDE\u63A5\u8D85\u65F6\u65F6\u95F4
+  network_timeout_in_second: 30 #tracker\u4E0Estorage\u7F51\u7EDC\u901A\u4FE1\u8D85\u65F6\u65F6\u95F4
+  charset: UTF-8  #\u5B57\u7B26\u7F16\u7801
+  tracker_servers: 192.168.101.64:22122 #tracker\u670D\u52A1\u5668\u5730\u5740\uFF0C\u591A\u4E2A\u5730\u5740\u4E2D\u95F4\u7528\u82F1\u6587\u9017\u53F7\u5206\u9694
+
+
+fdfs:
+  soTimeout: 1500 #socket\u8FDE\u63A5\u8D85\u65F6\u65F6\u957F
+  connectTimeout: 600 #\u8FDE\u63A5tracker\u670D\u52A1\u5668\u8D85\u65F6\u65F6\u957F
+  resHost: 192.168.5.129
+  storagePort: 8889
+  thumbImage: #\u7F29\u7565\u56FE\u751F\u6210\u53C2\u6570\uFF0C\u53EF\u9009
+    width: 150
+    height: 150
+  trackerList: #TrackerList\u53C2\u6570,\u652F\u6301\u591A\u4E2A\uFF0C\u6211\u8FD9\u91CC\u53EA\u6709\u4E00\u4E2A\uFF0C\u5982\u679C\u6709\u591A\u4E2A\u5728\u4E0B\u65B9\u52A0- x.x.x.x:port
+    - 192.168.5.129:22122
