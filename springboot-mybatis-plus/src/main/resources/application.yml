@@ -1,0 +1,39 @@
+
+spring:
+  datasource:
+#    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+#    url: jdbc:mysql://localhost:3306/mp?useSSL=false&serverTimezone=UTC
+    url: jdbc:p6spy:mysql://localhost:3306/mp?useSSL=false&serverTimezone=UTC
+    username: yzy
+    password: 19970806
+
+
+
+#mybatis
+mybatis-plus:
+#  mapper-locations: classpath*:/mapper/**/*.xml
+  #\u5B9E\u4F53\u626B\u63CF\uFF0C\u591A\u4E2Apackage\u7528\u9017\u53F7\u6216\u8005\u5206\u53F7\u5206\u9694
+#  typeAliasesPackage: io.renren.modules.*.entity
+  global-config:
+    #\u6570\u636E\u5E93\u76F8\u5173\u914D\u7F6E
+    db-config:
+      #\u4E3B\u952E\u7C7B\u578B  AUTO:"\u6570\u636E\u5E93ID\u81EA\u589E", INPUT:"\u7528\u6237\u8F93\u5165ID", ID_WORKER:"\u5168\u5C40\u552F\u4E00ID (\u6570\u5B57\u7C7B\u578B\u552F\u4E00ID)", UUID:"\u5168\u5C40\u552F\u4E00ID UUID";
+      id-type: AUTO
+      #\u5B57\u6BB5\u7B56\u7565 IGNORED:"\u5FFD\u7565\u5224\u65AD",NOT_NULL:"\u975E NULL \u5224\u65AD"),NOT_EMPTY:"\u975E\u7A7A\u5224\u65AD"
+#      field-strategy: NOT_NULL
+      #\u9A7C\u5CF0\u4E0B\u5212\u7EBF\u8F6C\u6362
+#      column-underline: true
+#      logic-delete-value: -1
+#      logic-not-delete-value: 0
+    banner: false
+  #\u539F\u751F\u914D\u7F6E
+  configuration:
+    # \u914D\u7F6Eslq\u6253\u5370\u65E5\u5FD7
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # \u5F00\u542F\u9A7C\u5CF0\u547D\u540D
+    map-underscore-to-camel-case: true
+    # \u5173\u95ED\u7F13\u5B58
+    cache-enabled: false
+#    call-setters-on-nulls: true
+#    jdbc-type-for-null: 'null'
