@@ -30,4 +30,18 @@ public class ScheduledService {
     public void hello() {
         System.out.println("hello...");
     }
+
+    @Scheduled(cron = "* * * * * *")
+    public void task1() throws InterruptedException {
+        System.out.println("=====task1 start=====");
+        Thread.sleep(5000);
+        System.out.println("=====task1 e n d=====");
+    }
+
+    @Scheduled(cron = "* * * * * *")
+    public void task2() throws InterruptedException {
+        System.out.println("=====task2 start=====");
+        Thread.sleep(5000);
+        System.out.println("=====task2 e n d=====");
+    }
 }
