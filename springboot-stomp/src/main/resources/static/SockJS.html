@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>WebSocket</title>
+</head>
+<body onload="disconnect()">
+<div>
+    <div>
+        <button id="connect" onclick="connect();">连接</button>
+        <button id="disconnect" disabled="disabled" onclick="disconnect();">断开连接</button>
+    </div>
+</div>
+<script src="https://d1fxtkz8shb9d2.cloudfront.net/sockjs-0.3.4.min.js"></script>
+<script src="https://cdn.bootcss.com/stomp.js/2.3.3/stomp.js"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<!--<script src="./protobuf.js"></script>-->
+
+
+<script type="text/javascript">
+    let stompClient = null;
+
+    function setConnected(connected) {
+        document.getElementById('connect').disabled = connected;
+        document.getElementById('disconnect').disabled = !connected;
+        $('#response1').html('');
+
+    }
+
+    function connect() {
+        let socket = new SockJS('http://127.0.0.1:8080/ws');
+        stompClient = Stomp.over(socket);
+        stompClient.connect({
+            name: 'TEST' // 携带客户端信息
+        }, function (frame) {
+            setConnected(true);
+            var depth = stompClient.subscribe('/market/demo', function (respnose) {
+                $('#response1').html("stomp：" + respnose.body);
+            });
+        });
+    }
+
+    function disconnect() {
+        if (stompClient != null) {
+            stompClient.disconnect();
+        }
+        setConnected(false);
+        console.log("断开连接");
+
+    }
+</script>
+</body>
+</html>
