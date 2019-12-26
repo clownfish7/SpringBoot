@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
 
 @SpringBootTest()
 class SpringbootShardingJdbcApplicationTests {
@@ -17,8 +19,14 @@ class SpringbootShardingJdbcApplicationTests {
     @Test
     void contextLoads() {
         for (int i = 0; i < 50; i++) {
-            dbDao.insert(new BigDecimal(i), (long) i, ""+i);
+            dbDao.insert(new BigDecimal(i), (long) i, "" + i);
         }
+    }
+
+    @Test
+    void select() {
+        List<Map<String, Object>> select = dbDao.select();
+        select.forEach(System.out::println);
     }
 
 }

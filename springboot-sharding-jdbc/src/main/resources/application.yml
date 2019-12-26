@@ -55,7 +55,6 @@ spring:
             multi-statement-allow: true
 
 
-
 #mybatis
 mybatis-plus:
   mapper-locations: classpath*:/mapper/*.xml
@@ -74,3 +73,8 @@ mybatis-plus:
     cache-enabled: false
     call-setters-on-nulls: true
     jdbc-type-for-null: 'null'
+logging:
+  level:
+    root: info
+    org.springframework.web: info
+    druid.sql: debug
