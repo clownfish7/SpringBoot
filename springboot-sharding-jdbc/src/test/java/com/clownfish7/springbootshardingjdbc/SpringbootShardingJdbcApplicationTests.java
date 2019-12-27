@@ -29,4 +29,9 @@ class SpringbootShardingJdbcApplicationTests {
         select.forEach(System.out::println);
     }
 
+    @Test
+    void insertConfig() {
+        Integer integer = dbDao.insertConfig(2);
+    }
+
 }
