@@ -19,9 +19,9 @@ node {
     scannerHome = tool 'sonarqube-scanner'
     withSonarQubeEnv('sonarqube'){
     sh label: '', script: '''
-            cd ${moudle}
-            pwd
-            sh "${scannerHome}/bin/sonar-scanner -X"
+        cd ${moudle}
+        pwd
+        ${scannerHome}/bin/sonar-scanner -X
     '''
     }
    }
