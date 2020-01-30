@@ -16,7 +16,7 @@ node {
     '''
    }
    stage('code checking'){
-    scannerHome = tool 'sonarqube-scanner'
+    def scannerHome = tool 'sonarqube-scanner'
     withSonarQubeEnv('sonarqube'){
     sh label: '', script: '''
         cd ${moudle}
