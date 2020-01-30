@@ -9,13 +9,17 @@ node {
    }
    stage('build') {
     echo 'build project'
-    sh 'cd ${moudle}'
+    sh 'pwd'
+    sh "cd ${moudle}"
+    sh 'pwd'
     sh 'mvn clean package'
    }
    stage('code checking'){
     scannerHome = tool 'sonarqube-scanner'
     withSonarQubeEnv('sonarqube'){
+        sh 'pwd'
         sh 'cd ${moudle}'
+        sh 'pwd'
         sh "${scannerHome}/bin/sonar-scanner -X"
     }
    }
