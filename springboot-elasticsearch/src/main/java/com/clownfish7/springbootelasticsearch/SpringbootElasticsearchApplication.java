@@ -4,7 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * SpringBoot默认支持两种技术来和E5交互；
+ * SpringBoot默认支持两种技术来和ES交互；
  * 1、Jest（默认不生效）
  *      需要导入jest的工具包（io.searchbox.client.Jestclient）
  * 2、SpringData ElasticSearch [Es版本有可能不合适]
@@ -22,7 +22,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  *      解决办法：
  *          1.进入容器
- *              docker exec ‐it tensquare_elasticsearch  /bin/bas
+ *              docker exec ‐it tensquare_elasticsearch  /bin/bash
  *          2.看到elasticsearch所在的目录为/usr/share/elasticsearch  ,进入config看到了 配置文件
  *              elasticsearch.yml
  *          3.容器内没有vi命令 拷贝配置文件到宿主机

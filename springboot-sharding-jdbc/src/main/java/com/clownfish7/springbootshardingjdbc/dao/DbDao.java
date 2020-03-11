@@ -30,4 +30,7 @@ public interface DbDao {
 
     @Insert(value = "insert into t_config(key2) values(#{v2})")
     public Integer insertConfig(@Param("v2") Integer v2);
+
+    @Select("select * from t_config")
+    public List<Map<String, Object>> selectConfig();
 }
