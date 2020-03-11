@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>${ENV, var="JOB_NAME"}-第${BUILD_NUMBER}次构建日志</title>
+</head>
+
+<body leftmargin="8" marginwidth="0" topmargin="8" marginheight="4"
+      offset="0">
+<table class="table" width="1000" border="1" cellspacing="0" cellpadding="5">
+    <caption align="center"><h3>项目构建信息</h3></caption>
+    <thead>
+    <tr>
+        <th>构建项目-<b>${PROJECT_NAME}</b></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><span style="color: #CC0000; "><b>构建结果 - ${BUILD_STATUS}</b></span></td>
+    </tr>
+    <tr>
+        <td>测试数量-${TEST_COUNTS, var="total"}</td>
+    </tr>
+    </tbody>
+    <tr>
+        本邮件由系统自动发出，无需回复！<br/>
+        各位同事，大家好，以下为${PROJECT_NAME}项目构建信息</br>
+    </tr>
+
+    <tr>
+        <td><br/>
+            <b><span style="color: #0B610B; ">构建报告</span></b>
+            <hr size="2" width="100%" align="center"/>
+            <ul>
+                <li>构建报告：<a href="${BUILD_URL}allure">${PROJECT_URL}allure</a></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td><br/>
+            <b><span style="color: #0B610B; ">构建信息</span></b>
+            <hr size="2" width="100%" align="center"/>
+            <ul>
+                <li>项目名称: ${PROJECT_NAME}</li>
+                <li>构建编号: 第${BUILD_NUMBER}次构建</li>
+                <li>触发原因：${CAUSE}</li>
+                <li>构建状态：${BUILD_STATUS}</li>
+                <li>构建日志：<a href="${BUILD_URL}console">${BUILD_URL}console</a></li>
+                <li>构建 Url: <a href="${BUILD_URL}">${BUILD_URL}</a></li>
+                <li>工作目录: <a href="${PROJECT_URL}ws">${PROJECT_URL}ws</a></li>
+                <li>项目 Url: <a href="${PROJECT_URL}">${PROJECT_URL}</a></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <b><span style="color: #0B610B; ">构建详细信息</span></b>
+            <hr size="2" width="98%" align="center"/>
+            <ul>
+                <li>BRANCH_NAME: ${BRANCH_NAME}</li>
+                <li>CHANGE_ID: ${CHANGE_ID}</li>
+                <li>CHANGE_URL: ${CHANGE_URL}</li>
+                <li>CHANGE_TITLE: ${CHANGE_TITLE}</li>
+                <li>CHANGE_AUTHOR: ${CHANGE_AUTHOR}</li>
+                <li>CHANGE_AUTHOR_DISPLAY_NAME: ${CHANGE_AUTHOR_DISPLAY_NAME}</li>
+                <li>CHANGE_AUTHOR_EMAIL: ${CHANGE_AUTHOR_EMAIL}</li>
+                <li>CHANGE_TARGET: ${CHANGE_TARGET}</li>
+                <li>BUILD_NUMBER: ${BUILD_NUMBER}</li>
+                <li>BUILD_DISPLAY_NAME: ${BUILD_DISPLAY_NAME}</li>
+                <li>BUILD_ID: ${BUILD_ID}</li>
+                <li>JOB_NAME: ${JOB_NAME}</li>
+                <li>JOB_BASE_NAME: ${JOB_BASE_NAME}</li>
+                <li>BUILD_TAG: ${BUILD_TAG}</li>
+                <li>EXECUTOR_NUMBER: ${EXECUTOR_NUMBER}</li>
+                <li>NODE_NAME: ${NODE_NAME}</li>
+                <li>NODE_LABELS: ${NODE_LABELS}</li>
+                <li>WORKSPACE: ${WORKSPACE}</li>
+                <li>JENKINS_HOME: ${JENKINS_HOME}</li>
+                <li>JENKINS_URL: ${JENKINS_URL}</li>
+                <li>BUILD_URL: ${BUILD_URL}</li>
+                <li>JOB_URL: ${JOB_URL}</li>
+                <li>GIT_COMMIT: ${GIT_COMMIT}</li>
+                <li>GIT_PREVIOUS_COMMIT: ${GIT_PREVIOUS_COMMIT}</li>
+                <li>GIT_PREVIOUS_SUCCESSFUL_COMMIT: ${GIT_PREVIOUS_SUCCESSFUL_COMMIT}</li>
+                <li>GIT_BRANCH: ${GIT_BRANCH}</li>
+                <li>GIT_LOCAL_BRANCH: ${GIT_LOCAL_BRANCH}</li>
+                <li>GIT_URL: ${GIT_URL}</li>
+                <li>GIT_COMMITTER_NAME: ${GIT_COMMITTER_NAME}</li>
+                <li>GIT_AUTHOR_NAME: ${GIT_AUTHOR_NAME}</li>
+                <li>GIT_COMMITTER_EMAIL: ${GIT_COMMITTER_EMAIL}</li>
+                <li>GIT_AUTHOR_EMAIL: ${GIT_AUTHOR_EMAIL}</li>
+                <li>MERCURIAL_REVISION: ${MERCURIAL_REVISION}</li>
+                <li>MERCURIAL_REVISION_SHORT: ${MERCURIAL_REVISION_SHORT}</li>
+                <li>MERCURIAL_REVISION_NUMBER: ${MERCURIAL_REVISION_NUMBER}</li>
+                <li>MERCURIAL_REVISION_BRANCH: ${MERCURIAL_REVISION_BRANCH}</li>
+                <li>MERCURIAL_REPOSITORY_URL: ${MERCURIAL_REPOSITORY_URL}</li>
+                <li>SVN_REVISION: ${SVN_REVISION}</li>
+                <li>SVN_URL: ${SVN_URL}</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <h4><span style="color: #0B610B; ">失败用例</span></h4>
+            ${FAILED_TESTS}<br/>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <h4><span style="color: #0B610B; ">最近提交(#$GIT_REVISION)</span></h4>
+            <!--
+            <ul>
+                ${CHANGES_SINCE_LAST_SUCCESS, reverse=true, format="%c", changesFormat="
+                <li>%d [%a] %m</li>
+                "}
+            </ul>
+            <-->
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <b><span style="color: #0B610B; ">变更信息:</span></b>
+            <hr size="2" width="100%" align="center"/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <ul>
+                <li>
+                    上次构建成功后变化 : ${CHANGES_SINCE_LAST_SUCCESS, reverse=true, format="%c", changesFormat="<li>%d [%a] %m</li>"}
+                </li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <ul>
+                <li>上次构建不稳定后变化 : ${CHANGES_SINCE_LAST_UNSTABLE, reverse=true, format="%c", changesFormat="<li>%d [%a] %m</li>"}
+                </li>
+            </ul>
+        </td>
+    <tr>
+        <td>
+            <ul>
+                <li>历史变更记录 : <a href="${PROJECT_URL}changes">${PROJECT_URL}changes</a></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <ul>
+                <li>变更集:${JELLY_SCRIPT,template="html"}</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td><b><span style="color: #0B610B; ">构建日志 (最后 200行):</span></b>
+            <hr size="2" width="100%" align="center"/>
+        </td>
+    </tr>
+    <tr>
+        <td><textarea cols="120" rows="30" readonly="readonly"
+                      style="font-family: Courier New; width: 100%">${BUILD_LOG, maxLines=200}</textarea>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
