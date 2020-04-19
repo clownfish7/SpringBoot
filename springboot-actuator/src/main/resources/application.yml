@@ -16,39 +16,39 @@ info:
   author: clownfish7
   version: v1.0
 
-# \u4E3B\u8981\u7684\u7AEF\u70B9:
-# HTTP\u65B9\u6CD5   \u8DEF\u5F84                 \u63CF\u8FF0
-# GET       /autoconfig         \u67E5\u770B\u81EA\u52A8\u914D\u7F6E\u7684\u4F7F\u7528\u60C5\u51B5
-# GET       /configprops        \u67E5\u770B\u914D\u7F6E\u5C5E\u6027\uFF0C\u5305\u62EC\u9ED8\u8BA4\u914D\u7F6E
-# GET       /beans              \u67E5\u770Bbean\u53CA\u5176\u5173\u7CFB\u5217\u8868
-# GET       /dump               \u6253\u5370\u7EBF\u7A0B\u6808
-# GET       /env                \u67E5\u770B\u6240\u6709\u73AF\u5883\u53D8\u91CF
-# GET       /env/{name}         \u67E5\u770B\u5177\u4F53\u53D8\u91CF\u503C
-# GET       /health             \u67E5\u770B\u5E94\u7528\u5065\u5EB7\u6307\u6807
-# GET       /info               \u67E5\u770B\u5E94\u7528\u4FE1\u606F
-# GET       /mappings           \u67E5\u770B\u6240\u6709url\u6620\u5C04
-# GET       /metrics            \u67E5\u770B\u5E94\u7528\u57FA\u672C\u6307\u6807
-# GET       /metrics/{name}     \u67E5\u770B\u5177\u4F53\u6307\u6807
-# POST      /shutdown           \u5173\u95ED\u5E94\u7528
-# GET       /trace              \u67E5\u770B\u57FA\u672C\u8FFD\u8E2A\u4FE1\u606F
+# 主要的端点:
+# HTTP方法   路径                 描述
+# GET       /autoconfig         查看自动配置的使用情况
+# GET       /configprops        查看配置属性，包括默认配置
+# GET       /beans              查看bean及其关系列表
+# GET       /dump               打印线程栈
+# GET       /env                查看所有环境变量
+# GET       /env/{name}         查看具体变量值
+# GET       /health             查看应用健康指标
+# GET       /info               查看应用信息
+# GET       /mappings           查看所有url映射
+# GET       /metrics            查看应用基本指标
+# GET       /metrics/{name}     查看具体指标
+# POST      /shutdown           关闭应用
+# GET       /trace              查看基本追踪信息
 
 #id               desc                                                    Sensitive
-#auditevents      \u663E\u793A\u5F53\u524D\u5E94\u7528\u7A0B\u5E8F\u7684\u5BA1\u8BA1\u4E8B\u4EF6\u4FE1\u606F                               Yes
-#beans            \u663E\u793A\u5E94\u7528Spring Beans\u7684\u5B8C\u6574\u5217\u8868                             Yes
-#caches           \u663E\u793A\u53EF\u7528\u7F13\u5B58\u4FE1\u606F                                           Yes
-#conditions       \u663E\u793A\u81EA\u52A8\u88C5\u914D\u7C7B\u7684\u72B6\u6001\u53CA\u53CA\u5E94\u7528\u4FE1\u606F                              Yes
-#configprops      \u663E\u793A\u6240\u6709 @ConfigurationProperties \u5217\u8868                     Yes
-#env              \u663E\u793A ConfigurableEnvironment \u4E2D\u7684\u5C5E\u6027                      Yes
-#??#flyway        \u663E\u793A Flyway \u6570\u636E\u5E93\u8FC1\u79FB\u4FE1\u606F                                    Yes
-#health           \u663E\u793A\u5E94\u7528\u7684\u5065\u5EB7\u4FE1\u606F(\u672A\u8BA4\u8BC1\u53EA\u663E\u793Astatus\uFF0C\u8BA4\u8BC1\u663E\u793A\u5168\u90E8\u4FE1\u606F\u8BE6\u60C5)      No
-#info             \u663E\u793A\u4EFB\u610F\u7684\u5E94\u7528\u4FE1\u606F(\u5728\u8D44\u6E90\u6587\u4EF6\u5199info.xxx\u5373\u53EF)                   No
-#??#liquibase     \u5C55\u793ALiquibase \u6570\u636E\u5E93\u8FC1\u79FB                                     Yes
-#metrics          \u5C55\u793A\u5F53\u524D\u5E94\u7528\u7684 metrics \u4FE1\u606F                                  Yes
-#mappings         \u663E\u793A\u6240\u6709 @RequestMapping \u8DEF\u5F84\u96C6\u5217\u8868                          Yes
-#scheduledtasks   \u663E\u793A\u5E94\u7528\u7A0B\u5E8F\u4E2D\u7684\u8BA1\u5212\u4EFB\u52A1                                      Yes
-#??#sessions      \u5141\u8BB8\u4ECESpring\u4F1A\u8BDD\u652F\u6301\u7684\u4F1A\u8BDD\u5B58\u50A8\u4E2D\u68C0\u7D22\u548C\u5220\u9664\u7528\u6237\u4F1A\u8BDD\u3002             Yes
-#shutdown         \u5141\u8BB8\u5E94\u7528\u4EE5\u4F18\u96C5\u7684\u65B9\u5F0F\u5173\u95ED(\u9ED8\u8BA4\u60C5\u51B5\u4E0B\u4E0D\u542F\u7528)                      Yes
-#threaddump       \u6267\u884C\u4E00\u4E2A\u7EBF\u7A0Bdump                                            Yes
-#httptrace        \u663E\u793AHTTP\u8DDF\u8E2A\u4FE1\u606F(\u9ED8\u8BA4\u663E\u793A\u6700\u540E100\u4E2AHTTP\u8BF7\u6C42 - \u54CD\u5E94\u4EA4\u6362)          Yes
+#auditevents      显示当前应用程序的审计事件信息                               Yes
+#beans            显示应用Spring Beans的完整列表                             Yes
+#caches           显示可用缓存信息                                           Yes
+#conditions       显示自动装配类的状态及及应用信息                              Yes
+#configprops      显示所有 @ConfigurationProperties 列表                     Yes
+#env              显示 ConfigurableEnvironment 中的属性                      Yes
+#??#flyway        显示 Flyway 数据库迁移信息                                    Yes
+#health           显示应用的健康信息(未认证只显示status，认证显示全部信息详情)      No
+#info             显示任意的应用信息(在资源文件写info.xxx即可)                   No
+#??#liquibase     展示Liquibase 数据库迁移                                     Yes
+#metrics          展示当前应用的 metrics 信息                                  Yes
+#mappings         显示所有 @RequestMapping 路径集列表                          Yes
+#scheduledtasks   显示应用程序中的计划任务                                      Yes
+#??#sessions      允许从Spring会话支持的会话存储中检索和删除用户会话。             Yes
+#shutdown         允许应用以优雅的方式关闭(默认情况下不启用)                      Yes
+#threaddump       执行一个线程dump                                            Yes
+#httptrace        显示HTTP跟踪信息(默认显示最后100个HTTP请求 - 响应交换)          Yes
 
 #配置文件中文git上传变ASCII测试
