@@ -1,0 +1,30 @@
+//include::{snippets}/restDocsGet/curl-request.adoc[]
+= REST API 文档
+Doc Writer {author_name} <doc.writer@asciidoc.org>
+2012-01-01
+:appversion: 1.0.1
+:toc: left
+:toclevels: 3
+:toc-title: 目录
+:doctype: book
+:icons: font
+:encoding: utf-8
+:author_name: clownfish7
+:author_email: yuzhiyou999@outlook.com
+:author: {author_name}
+:email: {author_email}
+//:docdatetime: 2012-01-01
+
+== 概述
+
+
+== RestDocs
+=== restDocGet
+operation::RestDocsControllerTest/testRestDocsGet[]
+
+=== restDocGetPath
+operation::RestDocsControllerTest/testRestDocsGetPath[]
+
+=== restDocPost
+operation::RestDocsControllerTest/testRestDocsPost[]
+
