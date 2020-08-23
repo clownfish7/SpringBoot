@@ -9,8 +9,8 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -36,20 +36,17 @@ class RestDocsControllerTest extends SpringbootRestdocApplicationTests {
 
     @Test
     void testRestDocsGetPath() {
-        try {
-            this.mockMvc.perform(get("/restDoc/get/{param1}", "param2"))
-                    .andDo(print())
-                    .andExpect(status().isOk())
-                    .andDo(document("{ClassName}/{methodName}",
-                            pathParameters(
-                                    parameterWithName("param1").description("param1")),
-                            responseFields(
-                                    fieldWithPath("test").optional().description("测试"),
-                                    fieldWithPath("code").optional().description("结果")
-                            )
-                    ));
-        } catch (Exception ignored) {
-        }
+        this.mockMvc.perform(get("/restDoc/get/{param1}", "param2"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andDo(document("{ClassName}/{methodName}",
+                        pathParameters(
+                                parameterWithName("param1").description("param1")),
+                        responseFields(
+                                fieldWithPath("test").optional().description("测试"),
+                                fieldWithPath("code").optional().description("结果")
+                        )
+                ));
     }
 
     @Test

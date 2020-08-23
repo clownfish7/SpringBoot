@@ -140,7 +140,7 @@
                     </execution>
                 </executions>
                 <dependencies>
-                    <!-- maybe dont need - copy from spring-restdoc -->
+                    <!-- *.adoc 中使用 operation 需要 -->
                     <dependency>
                         <groupId>org.springframework.restdocs</groupId>
                         <artifactId>spring-restdocs-asciidoctor</artifactId>
