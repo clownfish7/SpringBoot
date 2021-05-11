@@ -1,6 +1,5 @@
 package com.clownfish7.springbootactiviti7;
 
-import com.clownfish7.springbootactiviti7.utils.SecurityUtil;
 import org.activiti.api.process.model.ProcessDefinition;
 import org.activiti.api.process.model.ProcessInstance;
 import org.activiti.api.process.model.builders.ProcessPayloadBuilder;
@@ -27,8 +26,8 @@ class SpringbootActiviti7ApplicationTests {
     private ProcessRuntime processRuntime;
     @Autowired
     private TaskRuntime taskRuntime;
-    @Autowired
-    private SecurityUtil securityUtil;
+//    @Autowired
+//    private SecurityUtil securityUtil;
 
     @Autowired
     private RepositoryService repositoryService;
@@ -66,7 +65,7 @@ class SpringbootActiviti7ApplicationTests {
      */
     @Test
     public void testStartProcess() {
-        securityUtil.logInAs("system");
+//        securityUtil.logInAs("system");
         ProcessInstance pi = processRuntime.start(ProcessPayloadBuilder.start().withProcessDefinitionKey("myProcess")
                 .build());
         System.out.println("流程实例ID：" + pi.getId());
@@ -78,7 +77,7 @@ class SpringbootActiviti7ApplicationTests {
      */
     @Test
     public void testTask() {
-        securityUtil.logInAs("ryandawsonuk");
+//        securityUtil.logInAs("ryandawsonuk");
         Page<Task> taskPage = taskRuntime.tasks(Pageable.of(0, 10));
         if (taskPage.getTotalItems() > 0) {
             for (Task task : taskPage.getContent()) {

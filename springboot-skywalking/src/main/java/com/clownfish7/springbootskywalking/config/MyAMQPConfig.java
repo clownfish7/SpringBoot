@@ -1,6 +1,5 @@
-package com.clownfish7.springbootamqp.config;
+package com.clownfish7.springbootskywalking.config;
 
-import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.context.annotation.Bean;
@@ -16,15 +15,5 @@ public class MyAMQPConfig {
     @Bean
     public MessageConverter messageConverter() {
         return new Jackson2JsonMessageConverter();
-    }
-
-    @Bean
-    public Queue queue() {
-        return new Queue("clownfish");
-    }
-
-    @Bean
-    public Queue queue2() {
-        return new Queue("clownfish.news");
     }
 }
