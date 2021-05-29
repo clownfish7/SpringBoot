@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!-- 数据源 -->
+    <bean id="dataSourceActiviti" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="${activiti.jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="initialSize" value="1"/>
+        <property name="minIdle" value="1"/>
+        <property name="maxActive" value="20"/>
+    </bean>
+
+    <bean id="transactionManagerActiviti"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSourceActiviti" />
+    </bean>
+
+    <!-- 配置事务通知属性 -->
+    <tx:advice id="txAdviceActiviti" transaction-manager="transactionManagerActiviti">
+        <!-- 定义事务传播属性 -->
+        <tx:attributes>
+            <tx:method name="insert*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+            <tx:method name="update*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+            <tx:method name="edit*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+            <tx:method name="save*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+            <tx:method name="add*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+            <tx:method name="new*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+            <tx:method name="set*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+            <tx:method name="remove*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+            <tx:method name="delete*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+            <tx:method name="del*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+            <tx:method name="change*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+            <tx:method name="check*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+            <tx:method name="get*" propagation="REQUIRED" read-only="true" />
+            <tx:method name="find*" propagation="REQUIRED" read-only="true" />
+            <tx:method name="load*" propagation="REQUIRED" read-only="true" />
+            <tx:method name="miniBat*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+        </tx:attributes>
+    </tx:advice>
+
+    <!-- 配置事务切面 -->
+    <aop:config>
+        <aop:advisor pointcut="execution(* cn.ponytech.service.*.*(..))" advice-ref="txAdviceActiviti"/>
+    </aop:config>
+
+    <!-- 工作流引擎配置bean -->
+    <bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">
+        <!-- 数据源 -->
+        <property name="dataSource" ref="dataSourceActiviti"/>
+        <!-- 使用spring事务管理器 -->
+        <property name="transactionManager" ref="transactionManagerActiviti"/>
+        <!-- 数据库策略 -->
+        <property name="databaseSchemaUpdate" value="true"/>
+    </bean>
+
+    <!-- 流程引擎 -->
+    <bean id="processEngine" class="org.activiti.spring.ProcessEngineFactoryBean">
+        <property name="processEngineConfiguration" ref="processEngineConfiguration"/>
+    </bean>
+    <!-- 资源服务service -->
+    <bean id="repositoryService" factory-bean="processEngine"
+          factory-method="getRepositoryService"/>
+    <!-- 流程运行service -->
+    <bean id="runtimeService" factory-bean="processEngine"
+          factory-method="getRuntimeService"/>
+    <!-- 任务管理service -->
+    <bean id="taskService" factory-bean="processEngine"
+          factory-method="getTaskService"/>
+    <!-- 历史管理service -->
+    <bean id="historyService" factory-bean="processEngine"
+          factory-method="getHistoryService"/>
+
+    <bean id="judgeFalseListener" class="cn.ponytech.listener.JudgeFalseListener"/>
+    <bean id="judgeTrueListener" class="cn.ponytech.listener.JudgeTrueListener"/>
+
+</beans>
