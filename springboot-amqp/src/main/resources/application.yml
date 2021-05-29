@@ -5,3 +5,14 @@ spring:
     username: guest
     password: guest
     port: 5672
+    # 发送确认
+    publisher-confirms: true
+    # 路由失败回调
+    publisher-returns: true
+    template:
+      # 必须设置成true 消息路由失败通知监听者，而不是将消息丢弃
+      mandatory: true
+    listener:
+      simple:
+        # 手动ack，默认为auto
+        acknowledge-mode: manual
