@@ -4,15 +4,10 @@ import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.event.EventListener;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.mqtt.core.DefaultMqttPahoClientFactory;
 import org.springframework.integration.mqtt.core.MqttPahoClientFactory;
-import org.springframework.integration.mqtt.event.MqttConnectionFailedEvent;
-import org.springframework.integration.mqtt.event.MqttMessageDeliveredEvent;
-import org.springframework.integration.mqtt.event.MqttMessageSentEvent;
-import org.springframework.integration.mqtt.event.MqttSubscribedEvent;
 import org.springframework.integration.mqtt.outbound.MqttPahoMessageHandler;
 import org.springframework.messaging.MessageChannel;
 import org.springframework.messaging.MessageHandler;
@@ -29,7 +24,7 @@ public class MqttOutboundConfiguration {
     private MqttConfiguration mqttConfiguration;
 
     @Bean
-    public MessageChannel mqttOutboundChannel() {
+    public MessageChannel mqttOutboundChannel3() {
         return new DirectChannel();
     }
 
@@ -48,34 +43,13 @@ public class MqttOutboundConfiguration {
     }
 
     @Bean
-    @ServiceActivator(inputChannel = "mqttOutboundChannel")
+    @ServiceActivator(inputChannel = "mqttOutboundChannel3")
     public MessageHandler mqttOutbound() {
         MqttPahoMessageHandler messageHandler = new MqttPahoMessageHandler(
                 mqttConfiguration.getClientId() + "outbound", mqttClientFactory());
         messageHandler.setAsync(true);
         messageHandler.setAsyncEvents(true);
         return messageHandler;
-    }
-
-
-    @EventListener
-    public void listener(MqttSubscribedEvent e) {
-        System.out.println("MqttSubscribedEvent ... ");
-    }
-
-    @EventListener
-    public void listener(MqttMessageDeliveredEvent e) {
-        System.out.println("MqttMessageDeliveredEvent ... ");
-    }
-
-    @EventListener
-    public void listener(MqttMessageSentEvent e) {
-        System.out.println("MqttMessageSentEvent ... ");
-    }
-
-    @EventListener
-    public void listener(MqttConnectionFailedEvent e) {
-        System.out.println("MqttConnectionFailedEvent ... ");
     }
 
 }

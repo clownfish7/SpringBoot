@@ -28,27 +28,26 @@ public class MqttInboundConfiguration {
     @Autowired
     private MqttPahoClientFactory mqttClientFactory;
 
-    @Bean
+//    @Bean
     public MessageChannel mqttInboundChannel() {
         return new DirectChannel();
     }
 
     @Bean
-    public MessageProducer inbound() {
+    public MessageProducer inbound(MessageChannel mqttInboundChannel) {
         String[] inboundTopics = mqttConfiguration.getTopics().split(",");
         MqttPahoMessageDrivenChannelAdapter adapter = new MqttPahoMessageDrivenChannelAdapter(
                 mqttConfiguration.getClientId() + "_inbound", mqttClientFactory, inboundTopics);  //对inboundTopics主题进行监听
         adapter.setCompletionTimeout(5000);
         adapter.setQos(1);
         adapter.setConverter(new DefaultPahoMessageConverter());
-        adapter.setOutputChannel(mqttInboundChannel());
-        adapter.getConnectionInfo();
+        adapter.setOutputChannel(mqttInboundChannel);
         return adapter;
     }
 
     @Bean
     @ServiceActivator(inputChannel = "mqttInboundChannel")
-    public MessageHandler handler() {
+    public MessageHandler handler3() {
         return new MessageHandler() {
             @Override
             public void handleMessage(Message<?> message) throws MessagingException {

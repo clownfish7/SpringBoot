@@ -34,4 +34,16 @@ public class MqttPushController {
         mqttGateway.sendToTopic("pushTopicQos", topic, qos);
         return "ok";
     }
+
+    @RequestMapping("/push/r/{topic}/{responseTopic}")
+    public String pushResponseTopic(@PathVariable String topic, @PathVariable String responseTopic) {
+        mqttGateway.sendToTopic("pushTopicQos", topic, responseTopic);
+        return "ok";
+    }
+
+    @RequestMapping("/push/m")
+    public String pushMqttMessage() {
+        mqttGateway.sendToTopic("topic01","topic02","cdd",1,"head1","测试");
+        return "ok";
+    }
 }
