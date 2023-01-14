@@ -82,7 +82,7 @@ public class Mqtt {
         Mqttv5PahoMessageHandler messageHandler = new Mqttv5PahoMessageHandler(options, "mqttv5SIout");
         MqttHeaderMapper mqttHeaderMapper = new MqttHeaderMapper();
         // 这个设置运行映射消息头
-        mqttHeaderMapper.setOutboundHeaderNames(MqttHeaders.RESPONSE_TOPIC, MqttHeaders.CORRELATION_DATA,"head1","some_user_header", MessageHeaders.CONTENT_TYPE);
+        mqttHeaderMapper.setOutboundHeaderNames(MqttHeaders.RESPONSE_TOPIC, MqttHeaders.CORRELATION_DATA, "head1", "some_user_header", MessageHeaders.CONTENT_TYPE);
         messageHandler.setHeaderMapper(mqttHeaderMapper);
         messageHandler.setAsync(true);
         messageHandler.setAsyncEvents(true);
